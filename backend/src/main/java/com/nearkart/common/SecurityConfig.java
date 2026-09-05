@@ -50,6 +50,8 @@ class SecurityConfig {
 			.authorizeHttpRequests(requests -> requests
 				.requestMatchers("/actuator/health", "/api/v1/auth/**").permitAll()
 				.requestMatchers(HttpMethod.GET, "/api/v1/stores/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/api/v1/search/**").permitAll()
 				.anyRequest().authenticated())
 			.exceptionHandling(errors -> errors
 				.authenticationEntryPoint((request, response, exception) -> {

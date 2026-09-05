@@ -80,4 +80,8 @@ public class User {
 	public Set<Role> getRoles() {
 		return Set.copyOf(roles);
 	}
+
+	public boolean addRole(Role role) {
+		return roles.add(role);
+	}
 }

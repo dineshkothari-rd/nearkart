@@ -7,12 +7,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.nearkart.auth.RefreshTokenRepository;
 import com.nearkart.audit.AuditLogRepository;
+import com.nearkart.catalog.CatalogService;
+import com.nearkart.customer.CustomerService;
+import com.nearkart.search.SearchService;
+import com.nearkart.search.SearchRepository;
 import com.nearkart.store.StoreRepository;
 import com.nearkart.user.RoleRepository;
 import com.nearkart.user.UserRepository;
@@ -37,6 +42,16 @@ class NearKartApplicationTests {
 	private StoreRepository stores;
 	@MockitoBean
 	private AuditLogRepository auditLogs;
+	@MockitoBean
+	private CatalogService catalog;
+	@MockitoBean
+	private SearchService search;
+	@MockitoBean
+	private SearchRepository searchRepository;
+	@MockitoBean
+	private CustomerService customers;
+	@MockitoBean
+	private JdbcClient jdbc;
 
 	@Test
 	void healthIsPublic() throws Exception {

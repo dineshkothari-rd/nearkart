@@ -39,7 +39,7 @@ class AuthServiceTests {
 		var passwords = new BCryptPasswordEncoder(4);
 		var key = new SecretKeySpec("test-secret-with-at-least-32-bytes".getBytes(), "HmacSHA256");
 		var jwt = NimbusJwtEncoder.withSecretKey(key).algorithm(MacAlgorithm.HS256).build();
-		var properties = new AuthProperties("unused", Duration.ofMinutes(15), Duration.ofDays(30), false);
+		var properties = new AuthProperties("unused", Duration.ofMinutes(15), Duration.ofDays(30), false, "Strict");
 		var clock = Clock.fixed(Instant.parse("2026-09-05T12:00:00Z"), ZoneOffset.UTC);
 		var service = new AuthService(users, roles, refreshTokens, passwords, jwt, properties, clock);
 

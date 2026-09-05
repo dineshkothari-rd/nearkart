@@ -19,7 +19,8 @@ type ApiResponse<T> = {
   message: string | null
 }
 
-const apiBase = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080/api/v1'
+const apiBase = import.meta.env.VITE_API_BASE_URL
+  ?? (import.meta.env.DEV ? 'http://localhost:8080/api/v1' : '/api/v1')
 
 export async function apiRequest<T>(path: string, init: RequestInit = {}, accessToken?: string) {
   const response = await fetch(`${apiBase}${path}`, {

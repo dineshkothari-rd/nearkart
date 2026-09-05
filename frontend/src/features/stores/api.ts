@@ -8,6 +8,7 @@ export type Store = {
   timezone: string
   status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'SUSPENDED'
   approvalReason: string | null
+  hours: { weekday: number; opensAt: string | null; closesAt: string | null; closed: boolean }[]
   location: {
     addressLine: string
     locality: string

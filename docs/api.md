@@ -18,18 +18,19 @@ Errors use `success:false`, `data:null`, a safe `message`, `errors` with field/c
 | `POST` | `/auth/login` | Issue access and refresh credentials |
 | `POST` | `/auth/refresh` | Rotate the HttpOnly refresh cookie |
 | `POST` | `/auth/logout` | Revoke and clear the refresh cookie |
-| `GET` | `/search` | Product suggestions by `q`, category, page, size |
-| `GET` | `/search/nearby` | Offers by `q`, latitude, longitude, radiusKm, filters, sort, page, size |
-| `GET` | `/products/{id}` | Product and variants |
+| `GET` | `/search` | Product suggestions by `q`, page, size (implemented) |
+| `GET` | `/search/nearby` | Offers by `q`, latitude, longitude, radiusKm, sort, page, size (implemented) |
+| `GET` | `/products/{id}` | Product and variants (implemented) |
 | `GET` | `/products/{id}/nearby-stores` | Comparable nearby offers |
 | `GET` | `/stores/{id}` | Approved store detail and hours (implemented) |
-| `GET` | `/stores/{id}/products` | Paginated active listings |
-| `GET` | `/stores/{id}/reviews` | Paginated approved reviews |
+| `GET` | `/stores/{id}/products` | Active listings (implemented) |
+| `GET` | `/stores/{id}/reviews` | Latest approved reviews (implemented) |
 | `GET` | `/me` | Authenticated profile (implemented in Phase 2) |
-| `GET/POST/DELETE` | `/me/favorites[/{id}]` | Product/store favorites |
-| `GET/DELETE` | `/me/search-history` | Read or clear history |
-| `POST` | `/reviews` | One review per customer/store |
-| `POST` | `/reports` | Report incorrect data |
+| `GET` | `/me/favorites` | Product/store favorites (implemented) |
+| `POST/DELETE` | `/favorites[/{id}]` | Save or remove a favorite (implemented) |
+| `GET/DELETE` | `/me/search-history` | Read or clear history (implemented) |
+| `POST` | `/reviews` | One moderated review per customer/store (implemented) |
+| `POST` | `/reports` | Report incorrect data (implemented) |
 
 Nearby result item:
 
@@ -71,6 +72,11 @@ Store submission, listing, profile updates, and hours are implemented. All `{id}
 | `GET/PATCH` | `/admin/reviews[/{id}]` | Moderation |
 | `GET/PATCH` | `/admin/reports[/{id}]` | Resolution workflow |
 | `GET` | `/admin/audit-logs` | Filtered paginated audit trail |
+| `POST` | `/admin/catalog/categories` | Create a category |
+| `POST` | `/admin/catalog/products` | Create a product |
+| `POST` | `/admin/catalog/variants` | Create a product variant |
+
+Catalog creation and owner listing/inventory/price operations are implemented. Inventory and price updates require the latest returned version; stale writes return `409`.
 
 ## Validation and status semantics
 

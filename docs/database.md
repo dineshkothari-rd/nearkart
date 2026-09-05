@@ -75,7 +75,7 @@ All domain tables use UUID primary keys plus `created_at` and `updated_at` (`tim
 1. `V1`: PostgreSQL extensions
 2. `V2–V3`: users, roles, refresh tokens, and type alignment
 3. `V4`: stores, locations, hours, audit logs, and supporting indexes
-4. Categories, products, aliases, variants
-5. Store products, inventory, prices, price history
-6. Favorites, reviews, search history, reports
+4. `V5`: categories, products, variants, store products, inventory, prices, price history, and indexes
+5. `V6`: product aliases, trigram search indexes, and Indian catalog seed data
+6. `V7`: favorites, reviews, search history, reports, constraints, and query indexes
 7. Remaining analytics indexes and seed profile

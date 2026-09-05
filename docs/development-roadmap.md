@@ -18,15 +18,15 @@ Users/roles/refresh-token migrations; register/login/refresh/logout; BCrypt, JWT
 
 Store submission, approval, profile, coordinates, hours, owner checks, admin workflow, audit events, and minimal owner/admin UI.
 
-## Phase 4 — catalog, pricing, inventory
+## Phase 4 — complete
 
-Categories, products/variants/aliases, store listings, current/history price, inventory states, optimistic concurrency, freshness.
+Categories, products/variants, store listings, current/history price, inventory states, optimistic concurrency, configurable freshness, ownership checks, and audit events.
 
-## Phase 5 — search and ranking
+## Phase 5 — complete
 
-PostgreSQL partial search, candidate query, Haversine distance, filters/pagination, score/explanation, ranking tests, realistic Indian seed data.
+PostgreSQL trigram search, bounded candidate query, Haversine distance, radius/sort/pagination, freshness-weighted score/explanation, ranking tests, realistic Indian catalog data, and responsive customer UI.
 
-## Phase 6 — customer experience
+## Phase 6 — complete
 
 Mobile-first home/search/results/product/store, location input, directions, favorites, history, reviews, reports, accessible states.
 

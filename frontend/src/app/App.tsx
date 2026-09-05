@@ -1,10 +1,19 @@
-import { Link, Route, Routes } from 'react-router-dom'
+import { useState, type FormEvent } from 'react'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import { AuthPage } from '../features/auth/AuthPage'
 import { useAuth } from '../features/auth/AuthContext'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import { AdminStoresPage, OwnerStoresPage } from '../features/stores/StorePages'
+import { SearchPage } from '../features/search/SearchPage'
+import { ProductPage, SavedPage, StorePage } from '../features/customer/CustomerPages'
 
 function HomePage() {
+  const navigate = useNavigate()
+  const [query, setQuery] = useState('')
+  function search(event: FormEvent) {
+    event.preventDefault()
+    if (query.trim().length >= 2) navigate(`/search?q=${encodeURIComponent(query.trim())}`)
+  }
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col px-4 py-5 sm:px-6 sm:py-6">
       <nav className="flex flex-wrap items-center justify-between gap-3" aria-label="Primary navigation">
@@ -25,7 +34,7 @@ function HomePage() {
         <p className="mt-6 max-w-2xl text-lg text-stone-600">
           Compare nearby store prices, distance, availability, and how recently stock was updated.
         </p>
-        <form className="mt-10 flex max-w-2xl flex-col gap-3 sm:flex-row" role="search">
+        <form className="mt-10 flex max-w-2xl flex-col gap-3 sm:flex-row" onSubmit={search} role="search">
           <label className="sr-only" htmlFor="product-search">
             Search for a product
           </label>
@@ -34,7 +43,11 @@ function HomePage() {
             id="product-search"
             name="q"
             placeholder="Search for a product..."
+            required
+            minLength={2}
             type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
           />
           <button
             className="min-h-12 w-full rounded-xl bg-emerald-700 px-6 font-semibold text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
@@ -60,6 +73,7 @@ function AccountPage() {
         <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
           {user?.roles.includes('STORE_OWNER') && <Link className="font-semibold text-emerald-800 underline" to="/owner/stores">Manage stores</Link>}
           {user?.roles.includes('ADMIN') && <Link className="font-semibold text-emerald-800 underline" to="/admin/stores">Review stores</Link>}
+          {user?.roles.includes('CUSTOMER') && <Link className="font-semibold text-emerald-800 underline" to="/saved">Favorites and history</Link>}
         </div>
         <button className="mt-8 min-h-11 w-full rounded-xl border border-stone-300 px-4 py-2 font-semibold sm:w-auto" onClick={() => void logout()} type="button">
           Sign out
@@ -75,6 +89,9 @@ export function App() {
       <Route element={<HomePage />} path="/" />
       <Route element={<AuthPage mode="login" />} path="/login" />
       <Route element={<AuthPage mode="register" />} path="/register" />
+      <Route element={<SearchPage />} path="/search" />
+      <Route element={<ProductPage />} path="/products/:id" />
+      <Route element={<StorePage />} path="/stores/:id" />
       <Route element={<ProtectedRoute />}>
         <Route element={<AccountPage />} path="/account" />
       </Route>
@@ -83,6 +100,9 @@ export function App() {
       </Route>
       <Route element={<ProtectedRoute role="ADMIN" />}>
         <Route element={<AdminStoresPage />} path="/admin/stores" />
+      </Route>
+      <Route element={<ProtectedRoute role="CUSTOMER" />}>
+        <Route element={<SavedPage />} path="/saved" />
       </Route>
     </Routes>
   )

@@ -68,7 +68,7 @@ class AuthController {
 		return ResponseCookie.from(REFRESH_COOKIE, value)
 			.httpOnly(true)
 			.secure(properties.secureCookie())
-			.sameSite("Strict")
+			.sameSite(properties.cookieSameSite())
 			.path("/api/v1/auth")
 			.maxAge(maxAge)
 			.build();

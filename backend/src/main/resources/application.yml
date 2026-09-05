@@ -4,7 +4,7 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.security.autoconfigure.UserDetailsServiceAutoConfiguration
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/nearkart}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${POSTGRES_DB:nearkart}}
     username: ${POSTGRES_USER:nearkart}
     password: ${POSTGRES_PASSWORD:nearkart_dev}
   flyway:
@@ -24,6 +24,9 @@ management:
       show-details: never
 
 server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+  shutdown: graceful
   error:
     include-message: never
     include-stacktrace: never
@@ -34,4 +37,12 @@ nearkart:
     access-ttl: ${JWT_ACCESS_TTL:PT15M}
     refresh-ttl: ${JWT_REFRESH_TTL:P30D}
     secure-cookie: ${AUTH_SECURE_COOKIE:false}
+    cookie-same-site: ${AUTH_COOKIE_SAME_SITE:Strict}
+  bootstrap-admin:
+    email: ${ADMIN_EMAIL:}
+    password: ${ADMIN_PASSWORD:}
+  inventory:
+    fresh-for: ${INVENTORY_FRESH_FOR:PT30M}
+    recent-for: ${INVENTORY_RECENT_FOR:PT2H}
+    stale-after: ${INVENTORY_STALE_AFTER:P1D}
   cors-allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:5173}

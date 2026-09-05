@@ -6,7 +6,7 @@ NearKart helps customers find products in nearby physical stores, compare price,
 
 ## Status
 
-Phase 3 stores is complete: owners can submit and manage store profiles and hours, admins can approve or reject them, and approved profiles are public. Authentication, ownership checks, and audit events protect the workflow.
+Phase 6 customer experience is complete: responsive web/mobile product and store pages now add favorites, private search history, reviews, incorrect-information reports, and external directions to nearby search and comparison.
 
 ## Architecture
 
@@ -16,7 +16,7 @@ Phase 3 stores is complete: owners can submit and manage store profiles and hour
 - REST APIs under `/api/v1`
 - Stateless short-lived access JWTs with rotated refresh tokens
 
-See [architecture](docs/architecture.md), [database](docs/database.md), [API](docs/api.md), and [roadmap](docs/development-roadmap.md).
+See [architecture](docs/architecture.md), [database](docs/database.md), [API](docs/api.md), [deployment](docs/deployment.md), and [roadmap](docs/development-roadmap.md).
 
 ## Repository
 
@@ -61,6 +61,8 @@ Tests and builds:
 (cd backend && ./mvnw test)
 (cd frontend && npm test && npm run lint && npm run build)
 ```
+
+For a public test environment, follow the [Vercel + Render deployment guide](docs/deployment.md).
 
 ## Environment variables
 

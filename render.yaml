@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: nearkart-api
+    runtime: docker
+    region: singapore
+    plan: free
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: DB_HOST
+        fromDatabase: { name: nearkart-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: nearkart-db, property: port }
+      - key: POSTGRES_DB
+        fromDatabase: { name: nearkart-db, property: database }
+      - key: POSTGRES_USER
+        fromDatabase: { name: nearkart-db, property: user }
+      - key: POSTGRES_PASSWORD
+        fromDatabase: { name: nearkart-db, property: password }
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: CORS_ALLOWED_ORIGIN
+        sync: false
+      - key: AUTH_SECURE_COOKIE
+        value: "true"
+      - key: AUTH_COOKIE_SAME_SITE
+        value: Strict
+
+databases:
+  - name: nearkart-db
+    databaseName: nearkart
+    user: nearkart
+    region: singapore
+    plan: free
+    postgresMajorVersion: "17"
