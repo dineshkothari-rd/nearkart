@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: nearkart
+  autoconfigure:
+    exclude: org.springframework.boot.security.autoconfigure.UserDetailsServiceAutoConfiguration
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/nearkart}
+    username: ${POSTGRES_USER:nearkart}
+    password: ${POSTGRES_PASSWORD:nearkart_dev}
+  flyway:
+    enabled: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+nearkart:
+  auth:
+    jwt-secret: ${JWT_SECRET}
+    access-ttl: ${JWT_ACCESS_TTL:PT15M}
+    refresh-ttl: ${JWT_REFRESH_TTL:P30D}
+    secure-cookie: ${AUTH_SECURE_COOKIE:false}
+  cors-allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:5173}
