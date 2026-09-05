@@ -14,9 +14,9 @@ Generate React/Vite and Spring Boot projects, Maven wrapper, lint/format config,
 
 Users/roles/refresh-token migrations; register/login/refresh/logout; BCrypt, JWT, RBAC, protected UI; integration tests for auth and privilege failure.
 
-## Phase 3 — stores
+## Phase 3 — complete
 
-Store submission, approval, profile, coordinates, hours, owner checks, admin workflow, audit events.
+Store submission, approval, profile, coordinates, hours, owner checks, admin workflow, audit events, and minimal owner/admin UI.
 
 ## Phase 4 — catalog, pricing, inventory
 

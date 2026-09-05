@@ -12,6 +12,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.nearkart.auth.RefreshTokenRepository;
+import com.nearkart.audit.AuditLogRepository;
+import com.nearkart.store.StoreRepository;
 import com.nearkart.user.RoleRepository;
 import com.nearkart.user.UserRepository;
 
@@ -31,6 +33,10 @@ class NearKartApplicationTests {
 	private RoleRepository roles;
 	@MockitoBean
 	private RefreshTokenRepository refreshTokens;
+	@MockitoBean
+	private StoreRepository stores;
+	@MockitoBean
+	private AuditLogRepository auditLogs;
 
 	@Test
 	void healthIsPublic() throws Exception {

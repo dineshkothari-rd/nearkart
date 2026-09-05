@@ -21,11 +21,15 @@ type ApiResponse<T> = {
 
 const apiBase = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080/api/v1'
 
-async function request<T>(path: string, init: RequestInit = {}) {
+export async function apiRequest<T>(path: string, init: RequestInit = {}, accessToken?: string) {
   const response = await fetch(`${apiBase}${path}`, {
     ...init,
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json', ...init.headers },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      ...init.headers,
+    },
   })
   const body = (await response.json()) as ApiResponse<T>
   if (!response.ok) throw new Error(body.message ?? 'Request failed')
@@ -40,21 +44,21 @@ export type RegisterInput = {
 }
 
 export const login = (email: string, password: string) =>
-  request<AuthResponse>('/auth/login', {
+  apiRequest<AuthResponse>('/auth/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   })
 
 export const register = (input: RegisterInput) =>
-  request<AuthResponse>('/auth/register', { method: 'POST', body: JSON.stringify(input) })
+  apiRequest<AuthResponse>('/auth/register', { method: 'POST', body: JSON.stringify(input) })
 
 let refreshRequest: Promise<AuthResponse> | undefined
 
 export function refresh() {
-  refreshRequest ??= request<AuthResponse>('/auth/refresh', { method: 'POST' }).finally(
+  refreshRequest ??= apiRequest<AuthResponse>('/auth/refresh', { method: 'POST' }).finally(
     () => (refreshRequest = undefined),
   )
   return refreshRequest
 }
 
-export const logout = () => request<void>('/auth/logout', { method: 'POST' })
+export const logout = () => apiRequest<void>('/auth/logout', { method: 'POST' })

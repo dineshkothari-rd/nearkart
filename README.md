@@ -6,7 +6,7 @@ NearKart helps customers find products in nearby physical stores, compare price,
 
 ## Status
 
-Phase 2 authentication is complete: registration, login, JWT authorization, rotating refresh cookies, logout, RBAC claims, and protected frontend routes.
+Phase 3 stores is complete: owners can submit and manage store profiles and hours, admins can approve or reject them, and approved profiles are public. Authentication, ownership checks, and audit events protect the workflow.
 
 ## Architecture
 

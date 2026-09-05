@@ -22,7 +22,7 @@ Errors use `success:false`, `data:null`, a safe `message`, `errors` with field/c
 | `GET` | `/search/nearby` | Offers by `q`, latitude, longitude, radiusKm, filters, sort, page, size |
 | `GET` | `/products/{id}` | Product and variants |
 | `GET` | `/products/{id}/nearby-stores` | Comparable nearby offers |
-| `GET` | `/stores/{id}` | Approved store detail and hours |
+| `GET` | `/stores/{id}` | Approved store detail and hours (implemented) |
 | `GET` | `/stores/{id}/products` | Paginated active listings |
 | `GET` | `/stores/{id}/reviews` | Paginated approved reviews |
 | `GET` | `/me` | Authenticated profile (implemented in Phase 2) |
@@ -50,6 +50,7 @@ Nearby result item:
 | Method | Path | Purpose |
 |---|---|---|
 | `POST` | `/owner/stores` | Submit store for approval |
+| `GET` | `/owner/stores` | List owned stores |
 | `GET/PATCH` | `/owner/stores/{id}` | Read/update owned store |
 | `PUT` | `/owner/stores/{id}/hours` | Replace validated hours |
 | `GET/POST` | `/owner/stores/{id}/products` | List/add catalog link |
@@ -57,15 +58,15 @@ Nearby result item:
 | `PATCH` | `/owner/store-products/{id}/price` | Price/currency with expected version |
 | `GET` | `/owner/stores/{id}/analytics` | Bounded summary |
 
-All `{id}` resources are authorized against the authenticated owner; client-supplied owner/user IDs are ignored.
+Store submission, listing, profile updates, and hours are implemented. All `{id}` resources are authorized against the authenticated owner; client-supplied owner/user IDs are ignored.
 
 ## Admin
 
 | Method | Path | Purpose |
 |---|---|---|
 | `GET` | `/admin/dashboard` | Core metrics |
-| `GET` | `/admin/stores` | Approval/moderation queue |
-| `PATCH` | `/admin/stores/{id}/approval` | Approve/reject with reason |
+| `GET` | `/admin/stores` | Approval/moderation queue (implemented) |
+| `PATCH` | `/admin/stores/{id}/approval` | Approve/reject with reason (implemented) |
 | `GET/PATCH` | `/admin/users[/{id}]` | Search/suspend users |
 | `GET/PATCH` | `/admin/reviews[/{id}]` | Moderation |
 | `GET/PATCH` | `/admin/reports[/{id}]` | Resolution workflow |

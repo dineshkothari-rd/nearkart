@@ -27,4 +27,16 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /welcome back/i })).toBeInTheDocument()
   })
+
+  it('redirects users without the required role', () => {
+    render(
+      <AuthContext value={{ user: { id: '1', email: 'owner@example.com', displayName: 'Owner', roles: ['STORE_OWNER'] }, accessToken: 'token', loading: false, login: async () => {}, register: async () => {}, logout: async () => {} }}>
+        <MemoryRouter initialEntries={['/admin/stores']}>
+          <App />
+        </MemoryRouter>
+      </AuthContext>,
+    )
+
+    expect(screen.getByRole('heading', { name: /hello, owner/i })).toBeInTheDocument()
+  })
 })

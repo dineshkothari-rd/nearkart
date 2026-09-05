@@ -47,11 +47,11 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
 
   const isRegister = mode === 'register'
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-5 py-12">
-      <Link className="mb-10 text-xl font-bold text-emerald-800" to="/">
+    <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center px-4 py-8 sm:px-6 sm:py-12">
+      <Link className="mb-8 text-xl font-bold text-emerald-800 sm:mb-10" to="/">
         NearKart
       </Link>
-      <h1 className="text-3xl font-bold text-stone-950">{isRegister ? 'Create your account' : 'Welcome back'}</h1>
+      <h1 className="text-2xl font-bold text-stone-950 sm:text-3xl">{isRegister ? 'Create your account' : 'Welcome back'}</h1>
       <form className="mt-8 space-y-5" onSubmit={submit}>
         {isRegister && (
           <Field label="Name" error={errors.displayName?.message}>

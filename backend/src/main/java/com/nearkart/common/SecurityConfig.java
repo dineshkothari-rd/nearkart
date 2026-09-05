@@ -15,6 +15,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -48,6 +49,7 @@ class SecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
 			.authorizeHttpRequests(requests -> requests
 				.requestMatchers("/actuator/health", "/api/v1/auth/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/api/v1/stores/**").permitAll()
 				.anyRequest().authenticated())
 			.exceptionHandling(errors -> errors
 				.authenticationEntryPoint((request, response, exception) -> {
