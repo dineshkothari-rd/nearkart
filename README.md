@@ -41,6 +41,16 @@ Maven and PostgreSQL do not need global installation: use the committed Maven wr
 
 ## Setup, development, testing, and deployment
 
+Start the complete local stack with one command:
+
+```sh
+./scripts/dev.sh
+```
+
+On first run it creates `.env` with a random local JWT secret, installs frontend dependencies, starts PostgreSQL, backend, and frontend, and stops them together on `Ctrl+C`.
+
+Manual setup:
+
 ```sh
 cp .env.example .env
 docker compose up -d postgres
