@@ -38,7 +38,7 @@ Inventory/price editing, store profile/hours, summary analytics, bulk UI updates
 
 Users, stores, approvals, catalog, reviews, reports, audit logs, metrics.
 
-## Phase 9 — journey testing
+## Phase 9 — complete
 
 Customer and owner critical flows, API integration tests, frontend interaction tests, failure/concurrency cases.
 

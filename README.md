@@ -72,6 +72,14 @@ Tests and builds:
 (cd frontend && npm test && npm run lint && npm run build)
 ```
 
+With the local stack running, execute the complete API journey using the admin credentials configured in `.env`:
+
+```sh
+set -a && . ./.env && set +a && ./scripts/api-smoke.sh
+```
+
+This verifies customer, owner, and admin flows plus role isolation and stale inventory-write rejection. CI runs the same journey automatically.
+
 For a public test environment, follow the [Vercel + Render deployment guide](docs/deployment.md).
 
 ## Environment variables
