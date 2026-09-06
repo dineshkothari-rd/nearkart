@@ -6,6 +6,7 @@ import { ProtectedRoute } from '../features/auth/ProtectedRoute'
 import { AdminStoresPage, OwnerStoresPage } from '../features/stores/StorePages'
 import { SearchPage } from '../features/search/SearchPage'
 import { ProductPage, SavedPage, StorePage } from '../features/customer/CustomerPages'
+import { OwnerDashboardPage } from '../features/stores/OwnerDashboardPage'
 
 function HomePage() {
   const navigate = useNavigate()
@@ -97,6 +98,7 @@ export function App() {
       </Route>
       <Route element={<ProtectedRoute role="STORE_OWNER" />}>
         <Route element={<OwnerStoresPage />} path="/owner/stores" />
+        <Route element={<OwnerDashboardPage />} path="/owner/stores/:id" />
       </Route>
       <Route element={<ProtectedRoute role="ADMIN" />}>
         <Route element={<AdminStoresPage />} path="/admin/stores" />

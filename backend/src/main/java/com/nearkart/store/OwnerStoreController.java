@@ -35,9 +35,11 @@ import jakarta.validation.constraints.Min;
 class OwnerStoreController {
 
 	private final StoreService stores;
+	private final StoreAnalyticsService analytics;
 
-	OwnerStoreController(StoreService stores) {
+	OwnerStoreController(StoreService stores, StoreAnalyticsService analytics) {
 		this.stores = stores;
+		this.analytics = analytics;
 	}
 
 	@PostMapping
@@ -58,6 +60,11 @@ class OwnerStoreController {
 	@GetMapping("/{id}")
 	ApiResponse<StoreView> get(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
 		return ApiResponse.success(stores.owned(subject(jwt), id));
+	}
+
+	@GetMapping("/{id}/analytics")
+	ApiResponse<StoreAnalyticsService.AnalyticsView> analytics(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
+		return ApiResponse.success(analytics.analytics(subject(jwt), id));
 	}
 
 	@PatchMapping("/{id}")

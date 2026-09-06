@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
 import { createStore, decideStore, listOwnedStores, listPendingStores, type CreateStoreInput } from './api'
 
-const inputClass = 'min-h-11 w-full min-w-0 rounded-lg border border-stone-300 px-3'
+export const inputClass = 'min-h-11 w-full min-w-0 rounded-lg border border-stone-300 px-3'
 
-function PageShell({ title, children }: { title: string; children: React.ReactNode }) {
+export function PageShell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <main className="mx-auto min-h-dvh w-full max-w-4xl px-4 py-6 sm:px-6 sm:py-10">
       <Link className="font-bold text-emerald-800" to="/account">← Account</Link>
@@ -64,7 +64,8 @@ export function OwnerStoresPage() {
           {create.isPending ? 'Submitting…' : 'Submit store for approval'}
         </button>
       </form>
-      <StoreList stores={stores.data} loading={stores.isLoading} />
+      {stores.error && <p className="mt-6 text-red-700" role="alert">{stores.error.message}</p>}
+      <StoreList stores={stores.data} loading={stores.isLoading} actions={(id) => <Link className="mt-4 inline-flex min-h-11 items-center rounded-lg bg-emerald-700 px-4 font-semibold text-white" to={`/owner/stores/${id}`}>Manage store</Link>} />
     </PageShell>
   )
 }

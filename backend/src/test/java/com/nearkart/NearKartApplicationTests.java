@@ -19,6 +19,7 @@ import com.nearkart.customer.CustomerService;
 import com.nearkart.search.SearchService;
 import com.nearkart.search.SearchRepository;
 import com.nearkart.store.StoreRepository;
+import com.nearkart.store.StoreAnalyticsService;
 import com.nearkart.user.RoleRepository;
 import com.nearkart.user.UserRepository;
 
@@ -52,6 +53,8 @@ class NearKartApplicationTests {
 	private CustomerService customers;
 	@MockitoBean
 	private JdbcClient jdbc;
+	@MockitoBean
+	private StoreAnalyticsService analytics;
 
 	@Test
 	void healthIsPublic() throws Exception {

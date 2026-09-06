@@ -26,6 +26,7 @@ erDiagram
   USERS ||--o{ REPORTS : submits
   USERS ||--o{ REFRESH_TOKENS : authenticates
   USERS ||--o{ AUDIT_LOGS : acts
+  STORES ||--o{ STORE_EVENTS : records
 ```
 
 ## Table plan
@@ -53,6 +54,7 @@ All domain tables use UUID primary keys plus `created_at` and `updated_at` (`tim
 | `reports` | reporter, type, optional store/product targets, workflow status |
 | `refresh_tokens` | user FK; unique token hash, expiry, revoked/replaced metadata |
 | `audit_logs` | actor, action, target type/id, safe JSON metadata, timestamp |
+| `store_events` | approved-store search impression, detail view, and directions-click events |
 
 ## Core indexes
 
@@ -62,6 +64,7 @@ All domain tables use UUID primary keys plus `created_at` and `updated_at` (`tim
 - B-tree on store latitude/longitude for MVP bounding-box prefilter, followed by Haversine exact filtering
 - B-tree on reviews `(store_id, moderation_status, created_at desc)`
 - B-tree on favorites `(user_id, target_type)` and audit logs `(target_type, target_id, created_at desc)`
+- B-tree on store events `(store_id, event_type, created_at desc)` for bounded analytics
 
 ## Consistency
 
@@ -78,4 +81,4 @@ All domain tables use UUID primary keys plus `created_at` and `updated_at` (`tim
 4. `V5`: categories, products, variants, store products, inventory, prices, price history, and indexes
 5. `V6`: product aliases, trigram search indexes, and Indian catalog seed data
 6. `V7`: favorites, reviews, search history, reports, constraints, and query indexes
-7. Remaining analytics indexes and seed profile
+7. `V8`: store activity events and analytics index

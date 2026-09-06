@@ -3,6 +3,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { nearbySearch } from './api'
 import { useAuth } from '../auth/AuthContext'
+import { trackDirections } from '../stores/api'
 
 export function SearchPage() {
 	const { accessToken } = useAuth()
@@ -60,7 +61,7 @@ export function SearchPage() {
           </div>
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-stone-600"><span>{formatDistance(offer.distanceMeters)}</span><span>{offer.availability.replaceAll('_', ' ')}</span><span>{offer.freshness.replaceAll('_', ' ')}</span></div>
           <p className="mt-4 text-sm font-medium text-emerald-800">{offer.recommendation.reason}</p>
-          <div className="mt-5 grid grid-cols-2 gap-2"><Link className="flex min-h-11 items-center justify-center rounded-xl border font-semibold" to={`/stores/${offer.storeId}`}>View store</Link><a className="flex min-h-11 items-center justify-center rounded-xl border font-semibold" href={`https://www.google.com/maps/search/?api=1&query=${offer.storeLatitude},${offer.storeLongitude}`} target="_blank" rel="noreferrer">Directions</a></div>
+          <div className="mt-5 grid grid-cols-2 gap-2"><Link className="flex min-h-11 items-center justify-center rounded-xl border font-semibold" to={`/stores/${offer.storeId}`}>View store</Link><a className="flex min-h-11 items-center justify-center rounded-xl border font-semibold" href={`https://www.google.com/maps/search/?api=1&query=${offer.storeLatitude},${offer.storeLongitude}`} onClick={() => void trackDirections(offer.storeId).catch(() => undefined)} target="_blank" rel="noreferrer">Directions</a></div>
         </li>
       ))}</ul>
     </main>

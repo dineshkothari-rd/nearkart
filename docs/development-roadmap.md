@@ -30,7 +30,7 @@ PostgreSQL trigram search, bounded candidate query, Haversine distance, radius/s
 
 Mobile-first home/search/results/product/store, location input, directions, favorites, history, reviews, reports, accessible states.
 
-## Phase 7 — owner dashboard
+## Phase 7 — complete
 
 Inventory/price editing, store profile/hours, summary analytics, bulk UI updates (not CSV import).
 

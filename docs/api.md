@@ -24,6 +24,7 @@ Errors use `success:false`, `data:null`, a safe `message`, `errors` with field/c
 | `GET` | `/products/{id}/nearby-stores` | Comparable nearby offers |
 | `GET` | `/stores/{id}` | Approved store detail and hours (implemented) |
 | `GET` | `/stores/{id}/products` | Active listings (implemented) |
+| `POST` | `/stores/{id}/directions` | Record an external-directions click (implemented) |
 | `GET` | `/stores/{id}/reviews` | Latest approved reviews (implemented) |
 | `GET` | `/me` | Authenticated profile (implemented in Phase 2) |
 | `GET` | `/me/favorites` | Product/store favorites (implemented) |
@@ -57,9 +58,9 @@ Nearby result item:
 | `GET/POST` | `/owner/stores/{id}/products` | List/add catalog link |
 | `PATCH` | `/owner/store-products/{id}/inventory` | Quantity/state/source with expected version |
 | `PATCH` | `/owner/store-products/{id}/price` | Price/currency with expected version |
-| `GET` | `/owner/stores/{id}/analytics` | Bounded summary |
+| `GET` | `/owner/stores/{id}/analytics` | 30-day listing and activity summary |
 
-Store submission, listing, profile updates, and hours are implemented. All `{id}` resources are authorized against the authenticated owner; client-supplied owner/user IDs are ignored.
+Store submission, listing, profile/hours editing, inventory/price bulk-save UI, and analytics are implemented. All `{id}` resources are authorized against the authenticated owner; client-supplied owner/user IDs are ignored.
 
 ## Admin
 

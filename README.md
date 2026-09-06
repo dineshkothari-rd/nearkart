@@ -6,7 +6,7 @@ NearKart helps customers find products in nearby physical stores, compare price,
 
 ## Status
 
-Phase 6 customer experience is complete: responsive web/mobile product and store pages now add favorites, private search history, reviews, incorrect-information reports, and external directions to nearby search and comparison.
+Phase 7 owner dashboard is complete: responsive web/mobile screens now cover store profile and hours, catalog listings, inventory and price updates, bulk saves, and 30-day activity analytics.
 
 ## Architecture
 

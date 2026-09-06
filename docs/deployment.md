@@ -42,7 +42,7 @@ Use both a narrow mobile viewport and a desktop browser.
 5. Search for `Amul` or `Tata Salt`, allow browser location (or enter coordinates manually), and verify that the page remains usable at mobile and desktop widths.
 6. In browser developer tools, confirm `/api/v1/...` requests return from the Vercel domain without CORS or mixed-content errors.
 
-The current customer UI covers authentication, search, product/store details, favorites, history, reviews, and reports. Catalog creation plus store price/inventory updates are available through the documented API; their management UI is the next phase.
+The current UI covers authentication, search, product/store details, favorites, history, reviews, reports, and the owner dashboard for store details, hours, listings, price/inventory updates, and analytics. Admin catalog creation remains available through the documented API.
 
 ## Troubleshooting
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nearkart.common.ApiResponse;
 import com.nearkart.common.PageView;
 import com.nearkart.customer.CustomerService;
+import com.nearkart.store.StoreAnalyticsService;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -28,7 +29,10 @@ import jakarta.validation.constraints.Size;
 class SearchController {
 	private final SearchService search;
 	private final CustomerService customers;
-	SearchController(SearchService search, CustomerService customers) { this.search = search; this.customers = customers; }
+	private final StoreAnalyticsService analytics;
+	SearchController(SearchService search, CustomerService customers, StoreAnalyticsService analytics) {
+		this.search = search; this.customers = customers; this.analytics = analytics;
+	}
 
 	@GetMapping
 	ApiResponse<List<SearchModels.Suggestion>> suggestions(@RequestParam @Size(max = 120) String q,
@@ -47,6 +51,7 @@ class SearchController {
 			@RequestParam(defaultValue = "20") @Min(1) @Max(100) int size,
 			@AuthenticationPrincipal Jwt jwt) {
 		var result = PageView.from(search.nearby(q, latitude, longitude, radiusKm, sort, PageRequest.of(page, size)));
+		analytics.recordSearchImpressions(result.content().stream().map(SearchModels.NearbyOffer::storeId).toList());
 		if (jwt != null) customers.recordSearch(UUID.fromString(jwt.getSubject()), q);
 		return ApiResponse.success(result);
 	}

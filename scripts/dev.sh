@@ -3,7 +3,7 @@ set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 
-for tool in docker java node npm openssl curl lsof; do
+for tool in docker java node npm openssl curl lsof pgrep; do
 	command -v "$tool" >/dev/null 2>&1 || { echo "Missing required command: $tool" >&2; exit 1; }
 done
 
@@ -28,18 +28,24 @@ set +a
 
 backend_pid=
 frontend_pid=
+stop_tree() {
+	for child in $(pgrep -P "$1" 2>/dev/null || true); do
+		stop_tree "$child"
+	done
+	kill -TERM "$1" 2>/dev/null || true
+}
 cleanup() {
 	trap - EXIT INT TERM
-	[ -z "$backend_pid" ] || pkill -TERM -P "$backend_pid" 2>/dev/null || true
-	[ -z "$frontend_pid" ] || pkill -TERM -P "$frontend_pid" 2>/dev/null || true
-	[ -z "$backend_pid" ] || kill "$backend_pid" 2>/dev/null || true
-	[ -z "$frontend_pid" ] || kill "$frontend_pid" 2>/dev/null || true
+	[ -z "$backend_pid" ] || stop_tree "$backend_pid"
+	[ -z "$frontend_pid" ] || stop_tree "$frontend_pid"
 	[ -z "$backend_pid" ] || wait "$backend_pid" 2>/dev/null || true
 	[ -z "$frontend_pid" ] || wait "$frontend_pid" 2>/dev/null || true
 	docker compose -f "$ROOT/docker-compose.yml" stop postgres >/dev/null 2>&1 || true
 	echo "NearKart stopped."
 }
-trap cleanup EXIT INT TERM
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 docker compose -f "$ROOT/docker-compose.yml" up -d --wait postgres
 

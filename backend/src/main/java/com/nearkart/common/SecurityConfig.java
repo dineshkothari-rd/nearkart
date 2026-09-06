@@ -9,6 +9,8 @@ import java.util.List;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import jakarta.servlet.DispatcherType;
+
 import com.nearkart.auth.AuthProperties;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -48,8 +50,10 @@ class SecurityConfig {
 			.httpBasic(AbstractHttpConfigurer::disable)
 			.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
 			.authorizeHttpRequests(requests -> requests
+				.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
 				.requestMatchers("/actuator/health", "/api/v1/auth/**").permitAll()
 				.requestMatchers(HttpMethod.GET, "/api/v1/stores/**").permitAll()
+				.requestMatchers(HttpMethod.POST, "/api/v1/stores/*/directions").permitAll()
 				.requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
 				.requestMatchers(HttpMethod.GET, "/api/v1/search/**").permitAll()
 				.anyRequest().authenticated())
