@@ -6,7 +6,7 @@ NearKart helps customers find products in nearby physical stores, compare price,
 
 ## Status
 
-Phase 7 owner dashboard is complete: responsive web/mobile screens now cover store profile and hours, catalog listings, inventory and price updates, bulk saves, and 30-day activity analytics.
+Phase 10 production hardening is complete: customer, owner, and admin journeys are automated alongside rate limits, security headers, request tracing, bundle budgets, backups, and operational recovery guidance.
 
 ## Architecture
 
@@ -16,7 +16,7 @@ Phase 7 owner dashboard is complete: responsive web/mobile screens now cover sto
 - REST APIs under `/api/v1`
 - Stateless short-lived access JWTs with rotated refresh tokens
 
-See [architecture](docs/architecture.md), [database](docs/database.md), [API](docs/api.md), [deployment](docs/deployment.md), and [roadmap](docs/development-roadmap.md).
+See [architecture](docs/architecture.md), [database](docs/database.md), [API](docs/api.md), [deployment](docs/deployment.md), [operations](docs/operations.md), and [roadmap](docs/development-roadmap.md).
 
 ## Repository
 
@@ -71,6 +71,14 @@ Tests and builds:
 (cd backend && ./mvnw test)
 (cd frontend && npm test && npm run lint && npm run build)
 ```
+
+With the local stack running, execute the complete API journey using the admin credentials configured in `.env`:
+
+```sh
+set -a && . ./.env && set +a && ./scripts/api-smoke.sh
+```
+
+This verifies customer, owner, and admin flows plus role isolation and stale inventory-write rejection. CI runs the same journey automatically.
 
 For a public test environment, follow the [Vercel + Render deployment guide](docs/deployment.md).
 

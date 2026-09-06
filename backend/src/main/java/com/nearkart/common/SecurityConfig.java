@@ -31,6 +31,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -48,6 +49,10 @@ class SecurityConfig {
 			.cors(Customizer.withDefaults())
 			.formLogin(AbstractHttpConfigurer::disable)
 			.httpBasic(AbstractHttpConfigurer::disable)
+			.headers(headers -> headers
+				.contentSecurityPolicy(policy -> policy.policyDirectives("default-src 'none'; frame-ancestors 'none'"))
+				.referrerPolicy(policy -> policy.policy(ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN))
+				.permissionsPolicyHeader(policy -> policy.policy("camera=(), microphone=(), geolocation=()")))
 			.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
 			.authorizeHttpRequests(requests -> requests
 				.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()

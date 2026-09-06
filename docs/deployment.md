@@ -36,13 +36,13 @@ The admin account is created on the first successful API start. Later deployment
 Use both a narrow mobile viewport and a desktop browser.
 
 1. Open the Vercel URL and hard-refresh `/login` to verify SPA routing.
-2. Sign in with `ADMIN_EMAIL` and `ADMIN_PASSWORD`; `/account` should show **Review stores**.
+2. Sign in with `ADMIN_EMAIL` and `ADMIN_PASSWORD`; `/account` should show **Admin dashboard**.
 3. Register another account as a store owner, sign in, create a store, and add its location and hours.
 4. Sign back in as admin and approve the pending store under `/admin/stores`.
 5. Search for `Amul` or `Tata Salt`, allow browser location (or enter coordinates manually), and verify that the page remains usable at mobile and desktop widths.
 6. In browser developer tools, confirm `/api/v1/...` requests return from the Vercel domain without CORS or mixed-content errors.
 
-The current UI covers authentication, search, product/store details, favorites, history, reviews, reports, and the owner dashboard for store details, hours, listings, price/inventory updates, and analytics. Admin catalog creation remains available through the documented API.
+The current UI covers authentication, customer search and saved activity, owner store operations, and responsive admin management for users, stores, catalog, reviews, reports, metrics, and audit logs.
 
 ## Troubleshooting
 

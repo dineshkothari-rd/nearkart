@@ -19,15 +19,15 @@
 - Bean Validation plus domain validation for all input; JPA parameter binding only.
 - CORS exact allowlist from environment; no wildcard with credentials.
 - CSRF: SameSite cookie and origin validation protect refresh/logout; state-changing API calls require bearer access tokens.
-- Security headers: CSP, HSTS in production, nosniff, frame denial, and a restrictive referrer policy.
+- Backend and Vercel responses set CSP, HSTS on HTTPS, nosniff, frame denial, permissions, and restrictive referrer policies.
 - Output encoding in React; no unsafe HTML rendering without sanitization.
 - Secret values come from environment/secret manager and are excluded from logs and repository.
 
 ## Abuse controls
 
-- Rate limit login, registration, refresh, search, reviews, reports, and admin writes at the edge; document an in-process development fallback only if needed.
+- Fixed-window limits protect login, registration, refresh, search, reviews, reports, and admin writes on the initial single API instance; move limits to an edge/shared store before scaling horizontally.
 - One review per user/store, account/store status checks, length limits, moderation workflow, and report throttling.
-- Request IDs are accepted only if syntactically safe or generated server-side.
+- Request IDs are accepted only when syntactically safe or generated server-side, returned in `X-Request-ID`, and attached to log context.
 
 ## Operations
 

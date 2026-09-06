@@ -36,7 +36,14 @@ jobs:
           cache: maven
       - run: ./mvnw -B verify
       - run: ./mvnw -B spring-boot:start
+        env:
+          ADMIN_EMAIL: admin@ci.nearkart.test
+          ADMIN_PASSWORD: ci-only-admin-password
       - run: curl --fail --retry 10 --retry-delay 2 http://localhost:8080/actuator/health
+      - run: ../scripts/api-smoke.sh
+        env:
+          ADMIN_EMAIL: admin@ci.nearkart.test
+          ADMIN_PASSWORD: ci-only-admin-password
       - if: always()
         run: ./mvnw -B spring-boot:stop
 
@@ -56,3 +63,4 @@ jobs:
       - run: npm test
       - run: npm run lint
       - run: npm run build
+      - run: ../scripts/check-bundle-size.sh dist/assets

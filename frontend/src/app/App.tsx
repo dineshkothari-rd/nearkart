@@ -7,6 +7,7 @@ import { AdminStoresPage, OwnerStoresPage } from '../features/stores/StorePages'
 import { SearchPage } from '../features/search/SearchPage'
 import { ProductPage, SavedPage, StorePage } from '../features/customer/CustomerPages'
 import { OwnerDashboardPage } from '../features/stores/OwnerDashboardPage'
+import { AdminPage } from '../features/admin/AdminPage'
 
 function HomePage() {
   const navigate = useNavigate()
@@ -73,7 +74,7 @@ function AccountPage() {
         <p className="mt-2 break-all text-stone-600">{user?.email}</p>
         <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
           {user?.roles.includes('STORE_OWNER') && <Link className="font-semibold text-emerald-800 underline" to="/owner/stores">Manage stores</Link>}
-          {user?.roles.includes('ADMIN') && <Link className="font-semibold text-emerald-800 underline" to="/admin/stores">Review stores</Link>}
+          {user?.roles.includes('ADMIN') && <Link className="font-semibold text-emerald-800 underline" to="/admin">Admin dashboard</Link>}
           {user?.roles.includes('CUSTOMER') && <Link className="font-semibold text-emerald-800 underline" to="/saved">Favorites and history</Link>}
         </div>
         <button className="mt-8 min-h-11 w-full rounded-xl border border-stone-300 px-4 py-2 font-semibold sm:w-auto" onClick={() => void logout()} type="button">
@@ -101,6 +102,7 @@ export function App() {
         <Route element={<OwnerDashboardPage />} path="/owner/stores/:id" />
       </Route>
       <Route element={<ProtectedRoute role="ADMIN" />}>
+        <Route element={<AdminPage />} path="/admin" />
         <Route element={<AdminStoresPage />} path="/admin/stores" />
       </Route>
       <Route element={<ProtectedRoute role="CUSTOMER" />}>

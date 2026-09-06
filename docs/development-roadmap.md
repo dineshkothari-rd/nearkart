@@ -34,14 +34,14 @@ Mobile-first home/search/results/product/store, location input, directions, favo
 
 Inventory/price editing, store profile/hours, summary analytics, bulk UI updates (not CSV import).
 
-## Phase 8 — admin
+## Phase 8 — complete
 
 Users, stores, approvals, catalog, reviews, reports, audit logs, metrics.
 
-## Phase 9 — journey testing
+## Phase 9 — complete
 
 Customer and owner critical flows, API integration tests, frontend interaction tests, failure/concurrency cases.
 
-## Phase 10 — hardening
+## Phase 10 — complete
 
 Threat review, query plans/indexes, performance budgets, structured logging, backups/restore, deployment config, accessibility audit, operational runbook.
