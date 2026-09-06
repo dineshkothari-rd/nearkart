@@ -34,7 +34,7 @@ Mobile-first home/search/results/product/store, location input, directions, favo
 
 Inventory/price editing, store profile/hours, summary analytics, bulk UI updates (not CSV import).
 
-## Phase 8 — admin
+## Phase 8 — complete
 
 Users, stores, approvals, catalog, reviews, reports, audit logs, metrics.
 

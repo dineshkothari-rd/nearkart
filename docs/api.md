@@ -66,18 +66,19 @@ Store submission, listing, profile/hours editing, inventory/price bulk-save UI, 
 
 | Method | Path | Purpose |
 |---|---|---|
-| `GET` | `/admin/dashboard` | Core metrics |
+| `GET` | `/admin/dashboard` | Core platform and 30-day search metrics (implemented) |
 | `GET` | `/admin/stores` | Approval/moderation queue (implemented) |
 | `PATCH` | `/admin/stores/{id}/approval` | Approve/reject with reason (implemented) |
-| `GET/PATCH` | `/admin/users[/{id}]` | Search/suspend users |
-| `GET/PATCH` | `/admin/reviews[/{id}]` | Moderation |
-| `GET/PATCH` | `/admin/reports[/{id}]` | Resolution workflow |
-| `GET` | `/admin/audit-logs` | Filtered paginated audit trail |
-| `POST` | `/admin/catalog/categories` | Create a category |
-| `POST` | `/admin/catalog/products` | Create a product |
-| `POST` | `/admin/catalog/variants` | Create a product variant |
+| `GET/PATCH` | `/admin/users[/{id}]` | List and suspend/activate users (implemented) |
+| `GET/PATCH` | `/admin/reviews[/{id}]` | Review moderation (implemented) |
+| `GET/PATCH` | `/admin/reports[/{id}]` | Report resolution workflow (implemented) |
+| `GET` | `/admin/audit-logs` | Paginated audit trail (implemented) |
+| `GET/POST` | `/admin/catalog/categories` | List/create categories (implemented) |
+| `GET/POST` | `/admin/catalog/products` | List/create products (implemented) |
+| `PATCH` | `/admin/catalog/products/{id}` | Activate/deactivate a product (implemented) |
+| `POST` | `/admin/catalog/variants` | Create a product variant (implemented) |
 
-Catalog creation and owner listing/inventory/price operations are implemented. Inventory and price updates require the latest returned version; stale writes return `409`.
+All admin routes enforce the `ADMIN` role on the backend. Administrators cannot suspend their own account; suspending another user revokes active refresh tokens. Inventory and price updates require the latest returned version; stale writes return `409`.
 
 ## Validation and status semantics
 

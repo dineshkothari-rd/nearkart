@@ -35,10 +35,10 @@ class AdminStoreController {
 	}
 
 	@GetMapping
-	ApiResponse<PageView<StoreView>> pending(
+	ApiResponse<PageView<StoreView>> stores(@RequestParam(required = false) StoreStatus status,
 			@RequestParam(defaultValue = "0") @Min(0) int page,
 			@RequestParam(defaultValue = "20") @Min(1) @Max(100) int size) {
-		return ApiResponse.success(PageView.from(stores.pending(PageRequest.of(page, size))));
+		return ApiResponse.success(PageView.from(stores.adminStores(status, PageRequest.of(page, size))));
 	}
 
 	@PatchMapping("/{id}/approval")

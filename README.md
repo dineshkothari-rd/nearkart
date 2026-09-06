@@ -6,7 +6,7 @@ NearKart helps customers find products in nearby physical stores, compare price,
 
 ## Status
 
-Phase 7 owner dashboard is complete: responsive web/mobile screens now cover store profile and hours, catalog listings, inventory and price updates, bulk saves, and 30-day activity analytics.
+Phase 8 admin operations are complete: responsive web/mobile screens now cover platform metrics, users, stores and approvals, catalog management, review/report moderation, and audit logs.
 
 ## Architecture
 

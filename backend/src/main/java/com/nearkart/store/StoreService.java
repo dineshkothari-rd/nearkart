@@ -95,8 +95,8 @@ class StoreService {
 	}
 
 	@Transactional(readOnly = true)
-	Page<StoreView> pending(Pageable pageable) {
-		return stores.findAllByStatus(StoreStatus.PENDING, pageable).map(this::view);
+	Page<StoreView> adminStores(StoreStatus status, Pageable pageable) {
+		return (status == null ? stores.findAll(pageable) : stores.findAllByStatus(status, pageable)).map(this::view);
 	}
 
 	@Transactional

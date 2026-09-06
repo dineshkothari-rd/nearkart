@@ -96,7 +96,10 @@ export const trackDirections = (storeId: string) =>
   apiRequest<void>(`/stores/${storeId}/directions`, { method: 'POST' })
 
 export const listPendingStores = (token: string) =>
-  apiRequest<Page<Store>>('/admin/stores', {}, token).then((page) => page.content)
+  apiRequest<Page<Store>>('/admin/stores?status=PENDING', {}, token).then((page) => page.content)
+
+export const listAdminStores = (token: string) =>
+  apiRequest<Page<Store>>('/admin/stores?size=100', {}, token).then((page) => page.content)
 
 export const decideStore = (token: string, id: string, decision: 'APPROVE' | 'REJECT', reason?: string) =>
   apiRequest<Store>(
