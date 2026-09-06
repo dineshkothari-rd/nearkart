@@ -31,6 +31,8 @@ services:
         value: "true"
       - key: AUTH_COOKIE_SAME_SITE
         value: Strict
+      - key: LOGGING_STRUCTURED_FORMAT_CONSOLE
+        value: logstash
 
 databases:
   - name: nearkart-db

@@ -27,9 +27,18 @@ server:
   port: ${PORT:8080}
   forward-headers-strategy: framework
   shutdown: graceful
+  compression:
+    enabled: true
+    min-response-size: 1024
+  max-http-request-header-size: 16KB
+  tomcat:
+    max-http-form-post-size: 1MB
+    max-swallow-size: 1MB
   error:
     include-message: never
     include-stacktrace: never
+
+spring.lifecycle.timeout-per-shutdown-phase: 20s
 
 nearkart:
   auth:

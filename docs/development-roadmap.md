@@ -42,6 +42,6 @@ Users, stores, approvals, catalog, reviews, reports, audit logs, metrics.
 
 Customer and owner critical flows, API integration tests, frontend interaction tests, failure/concurrency cases.
 
-## Phase 10 — hardening
+## Phase 10 — complete
 
 Threat review, query plans/indexes, performance budgets, structured logging, backups/restore, deployment config, accessibility audit, operational runbook.

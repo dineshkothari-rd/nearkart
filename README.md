@@ -6,7 +6,7 @@ NearKart helps customers find products in nearby physical stores, compare price,
 
 ## Status
 
-Phase 8 admin operations are complete: responsive web/mobile screens now cover platform metrics, users, stores and approvals, catalog management, review/report moderation, and audit logs.
+Phase 10 production hardening is complete: customer, owner, and admin journeys are automated alongside rate limits, security headers, request tracing, bundle budgets, backups, and operational recovery guidance.
 
 ## Architecture
 
@@ -16,7 +16,7 @@ Phase 8 admin operations are complete: responsive web/mobile screens now cover p
 - REST APIs under `/api/v1`
 - Stateless short-lived access JWTs with rotated refresh tokens
 
-See [architecture](docs/architecture.md), [database](docs/database.md), [API](docs/api.md), [deployment](docs/deployment.md), and [roadmap](docs/development-roadmap.md).
+See [architecture](docs/architecture.md), [database](docs/database.md), [API](docs/api.md), [deployment](docs/deployment.md), [operations](docs/operations.md), and [roadmap](docs/development-roadmap.md).
 
 ## Repository
 
