@@ -17,23 +17,28 @@ import com.nearkart.common.ApiException;
 @Service
 public class SearchService {
 	private final SearchRepository search;
+	private final AiDiscoveryService discovery;
 	private final RankingService ranking;
 	private final Clock clock;
 	private final Duration freshFor;
 	private final Duration recentFor;
 	private final Duration staleAfter;
 
-	SearchService(SearchRepository search, RankingService ranking, Clock clock,
+	SearchService(SearchRepository search, AiDiscoveryService discovery, RankingService ranking, Clock clock,
 			@Value("${nearkart.inventory.fresh-for:PT30M}") Duration freshFor,
 			@Value("${nearkart.inventory.recent-for:PT2H}") Duration recentFor,
 			@Value("${nearkart.inventory.stale-after:P1D}") Duration staleAfter) {
-		this.search = search; this.ranking = ranking; this.clock = clock;
+		this.search = search; this.discovery = discovery; this.ranking = ranking; this.clock = clock;
 		this.freshFor = freshFor; this.recentFor = recentFor; this.staleAfter = staleAfter;
 	}
 
 	List<SearchModels.Suggestion> suggestions(String query, Pageable pageable) {
 		String normalized = query(query);
 		return search.suggestions(normalized, pageable.getPageSize(), Math.toIntExact(pageable.getOffset()));
+	}
+
+	List<SearchModels.DiscoverySuggestion> discover(String query) {
+		return discovery.suggestions(query(query));
 	}
 
 	Page<SearchModels.NearbyOffer> nearby(String query, double latitude, double longitude,

@@ -18,9 +18,19 @@ export type Offer = {
   recommendation: { score: number; reason: string }
 }
 
+export type DiscoverySuggestion = {
+  productName: string
+  brand: string | null
+  variant: string
+  reason: string
+}
+
 export const nearbySearch = (q: string, latitude: number, longitude: number, token?: string) =>
   apiRequest<{ content: Offer[] }>(
     `/search/nearby?${new URLSearchParams({ q, latitude: String(latitude), longitude: String(longitude) })}`,
     {},
     token,
   ).then((page) => page.content)
+
+export const discoverProducts = (q: string) =>
+  apiRequest<DiscoverySuggestion[]>(`/search/discover?${new URLSearchParams({ q })}`)

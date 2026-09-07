@@ -7,6 +7,7 @@ import java.util.UUID;
 final class SearchModels {
 	private SearchModels() {}
 	record Suggestion(UUID productId, String productName, String brand, UUID variantId, String variant) {}
+	record DiscoverySuggestion(String productName, String brand, String variant, String reason) {}
 	record Candidate(UUID productId, String productName, String brand, UUID variantId, String variant,
 		UUID storeId, String storeName, BigDecimal amount, String currency, String availability,
 		Instant observedAt, double distanceMeters, double storeLatitude, double storeLongitude) {}
