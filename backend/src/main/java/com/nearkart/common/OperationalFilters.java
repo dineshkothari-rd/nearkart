@@ -66,6 +66,7 @@ class RateLimitFilter extends OncePerRequestFilter {
 	private static Rule rule(HttpServletRequest request) {
 		String method = request.getMethod(), path = request.getRequestURI();
 		if ("POST".equals(method) && path.matches("/api/v1/auth/(login|register|refresh)")) return new Rule("auth", 20);
+		if ("GET".equals(method) && path.equals("/api/v1/search/discover")) return new Rule("ai-discovery", 5);
 		if ("GET".equals(method) && path.startsWith("/api/v1/search")) return new Rule("search", 120);
 		if ("POST".equals(method) && (path.equals("/api/v1/reviews") || path.equals("/api/v1/reports"))) return new Rule("feedback", 30);
 		if (!"GET".equals(method) && path.startsWith("/api/v1/admin/")) return new Rule("admin", 120);

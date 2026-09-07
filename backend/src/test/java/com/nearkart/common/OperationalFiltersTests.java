@@ -29,5 +29,13 @@ class OperationalFiltersTests {
 		}
 		assertThat(response.getStatus()).isEqualTo(429);
 		assertThat(response.getHeader("Retry-After")).isEqualTo("60");
+
+		var discovery = new MockHttpServletRequest("GET", "/api/v1/search/discover");
+		for (int attempt = 0; attempt < 6; attempt++) {
+			response = new MockHttpServletResponse();
+			limiter.doFilter(discovery, response, mock(FilterChain.class));
+		}
+		assertThat(response.getStatus()).isEqualTo(429);
+		assertThat(response.getHeader("X-RateLimit-Limit")).isNull();
 	}
 }

@@ -55,4 +55,9 @@ class SearchController {
 		if (jwt != null) customers.recordSearch(UUID.fromString(jwt.getSubject()), q);
 		return ApiResponse.success(result);
 	}
+
+	@GetMapping("/discover")
+	ApiResponse<List<SearchModels.DiscoverySuggestion>> discover(@RequestParam @Size(max = 120) String q) {
+		return ApiResponse.success(search.discover(q));
+	}
 }
