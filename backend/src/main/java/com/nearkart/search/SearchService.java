@@ -17,14 +17,14 @@ import com.nearkart.common.ApiException;
 @Service
 public class SearchService {
 	private final SearchRepository search;
-	private final AiDiscoveryService discovery;
+	private final ProductDiscoveryService discovery;
 	private final RankingService ranking;
 	private final Clock clock;
 	private final Duration freshFor;
 	private final Duration recentFor;
 	private final Duration staleAfter;
 
-	SearchService(SearchRepository search, AiDiscoveryService discovery, RankingService ranking, Clock clock,
+	SearchService(SearchRepository search, ProductDiscoveryService discovery, RankingService ranking, Clock clock,
 			@Value("${nearkart.inventory.fresh-for:PT30M}") Duration freshFor,
 			@Value("${nearkart.inventory.recent-for:PT2H}") Duration recentFor,
 			@Value("${nearkart.inventory.stale-after:P1D}") Duration staleAfter) {

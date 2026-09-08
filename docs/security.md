@@ -26,7 +26,7 @@
 ## Abuse controls
 
 - Fixed-window limits protect login, registration, refresh, search, reviews, reports, and admin writes on the initial single API instance; move limits to an edge/shared store before scaling horizontally.
-- OpenAI catalog suggestions run server-side, are limited to five requests per IP per minute, and never claim store inventory, price, or availability.
+- Free catalog suggestions are limited to five requests per IP per minute and never claim store inventory, price, or availability.
 - One review per user/store, account/store status checks, length limits, moderation workflow, and report throttling.
 - Request IDs are accepted only when syntactically safe or generated server-side, returned in `X-Request-ID`, and attached to log context.
 
