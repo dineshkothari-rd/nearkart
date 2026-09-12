@@ -71,7 +71,7 @@ export function SearchPage() {
         </li>
       ))}</ul>
       {discovery.isLoading && <p className="mt-8" role="status">Finding product alternatives…</p>}
-      {Boolean(discovery.data?.length) && <section className="mt-10"><h2 className="text-2xl font-bold">Product ideas</h2><p className="mt-2 text-sm text-stone-600">AI-generated suggestions; local price and availability are not verified.</p><ul className="mt-4 grid gap-3 sm:grid-cols-2">{discovery.data?.map((item) => <li className="rounded-xl border bg-white p-4" key={`${item.productName}-${item.variant}`}><h3 className="font-bold">{item.productName} <span className="font-normal text-stone-600">{item.variant}</span></h3>{item.brand && <p className="mt-1 text-sm text-stone-600">{item.brand}</p>}<p className="mt-3 text-sm text-emerald-800">{item.reason}</p></li>)}</ul></section>}
+      {Boolean(discovery.data?.length) && <section className="mt-10"><h2 className="text-2xl font-bold">Product ideas</h2><p className="mt-2 text-sm text-stone-600">Free automatic suggestions; local price and availability are not verified.</p><ul className="mt-4 grid gap-3 sm:grid-cols-2">{discovery.data?.map((item) => <li className="rounded-xl border bg-white p-4" key={`${item.productName}-${item.variant}`}><h3 className="font-bold">{item.productName} <span className="font-normal text-stone-600">{item.variant}</span></h3>{item.brand && <p className="mt-1 text-sm text-stone-600">{item.brand}</p>}<p className="mt-3 text-sm text-emerald-800">{item.reason}</p></li>)}</ul></section>}
     </main>
   )
 }

@@ -19,15 +19,12 @@ The first deployment can complete before the API exists; API requests will start
    openssl rand -base64 48
    ```
 
-   Create an OpenAI API key in the OpenAI dashboard for automatic product suggestions.
-
 2. In Render, select **New → Blueprint**, connect the same repository, and use the root `render.yaml`.
 3. Enter the requested values:
    - `JWT_SECRET`: the generated value
    - `ADMIN_EMAIL`: the initial administrator email
    - `ADMIN_PASSWORD`: a unique password of 12–72 characters
    - `CORS_ALLOWED_ORIGIN`: the exact Vercel URL from step 1, without a trailing slash
-   - `OPENAI_API_KEY`: the server-side OpenAI API key; never expose it in Vercel or client code
 4. Apply the Blueprint and wait until `https://nearkart-api.onrender.com/actuator/health` returns `{"status":"UP"}`.
 
 If Render changes the service name because `nearkart-api` is unavailable, replace the hostname in `frontend/vercel.json`, commit it, and redeploy Vercel.
